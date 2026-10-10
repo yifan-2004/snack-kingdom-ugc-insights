@@ -1,6 +1,20 @@
 # Snack Kingdom · UGC Insights
 
-A social-listening workbench for turning scattered brand conversations into traceable consumer insights. The application connects posts and comments to canonical topics, separates brand opinions from unrelated reactions, and keeps business summaries linked to their source evidence.
+A social-listening and LLM analytics platform built to help Snack Kingdom understand consumer feedback across social media. It turns scattered posts and comments into sentiment distributions, ranked topics and evidence-backed business summaries.
+
+## Project background
+
+The broader project crawled, cleaned and analyzed **849 posts and 12,738 comments from TikTok and RedNote**. Its central challenge is not simply detecting positive or negative language: a comment may be reacting to the creator rather than the brand, asking a practical question, or discussing a different subject entirely.
+
+The system was designed around three priorities:
+
+- **Understand comments in context.** Preserve the parent post and reply context when classifying brand relevance, sentiment and question intent; route uncertain classifications to review.
+- **Turn recurring conversations into useful themes.** Combine embedding clustering with LLM topic normalization, then rank themes by mentions and likes without confusing discussion volume with sentiment.
+- **Keep insights traceable.** Link answers and summaries to supporting posts and comments, maintain incremental retrieval indexes, and support custom evaluation questions, batch runs and citation checks.
+
+In the broader project's Python/Ray pipeline, batched comment analysis and embedding generation achieved **7.9× throughput over a sequential baseline on an 800-comment benchmark (2.67 vs. 0.34 comments/s)**. This is a full-system benchmark, not a measurement of this repository's web runtime. The Python/Ray pipeline and its benchmark artifacts are not included here.
+
+This repository contains the **web workbench and backend**, with fictional sample records for public exploration. The architecture documentation distinguishes the included implementation from the broader processing system.
 
 ## Interface preview
 
