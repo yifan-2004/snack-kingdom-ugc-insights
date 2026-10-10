@@ -1,20 +1,40 @@
-# Snack Kingdom · UGC Insights
+# Social Listening & LLM Analytics Platform
 
-A social-listening and LLM analytics platform built to help Snack Kingdom understand consumer feedback across social media. It turns scattered posts and comments into sentiment distributions, ranked topics and evidence-backed business summaries.
+A social-listening platform for **Snack Kingdom**, a snack brand, connecting social-media collection, contextual comment analysis and evidence-backed consumer insights in one workbench.
 
 ## Project background
 
-The broader project crawled, cleaned and analyzed **849 posts and 12,738 comments from TikTok and RedNote**. Its central challenge is not simply detecting positive or negative language: a comment may be reacting to the creator rather than the brand, asking a practical question, or discussing a different subject entirely.
+The end-to-end project crawled, cleaned and analyzed **849 posts and 12,738 comments from TikTok and RedNote**, producing sentiment distributions, topic-level insights and business summaries grounded in source evidence.
 
-The system was designed around three priorities:
+The goal is to identify what consumers are saying **about the brand**, not simply label every comment as positive or negative. Reactions to a creator, practical questions and unrelated discussion need different treatment before they can support a business conclusion.
 
-- **Understand comments in context.** Preserve the parent post and reply context when classifying brand relevance, sentiment and question intent; route uncertain classifications to review.
-- **Turn recurring conversations into useful themes.** Combine embedding clustering with LLM topic normalization, then rank themes by mentions and likes without confusing discussion volume with sentiment.
-- **Keep insights traceable.** Link answers and summaries to supporting posts and comments, maintain incremental retrieval indexes, and support custom evaluation questions, batch runs and citation checks.
+## Core design
 
-In the broader project's Python/Ray pipeline, batched comment analysis and embedding generation achieved **7.9× throughput over a sequential baseline on an 800-comment benchmark (2.67 vs. 0.34 comments/s)**. This is a full-system benchmark, not a measurement of this repository's web runtime. The Python/Ray pipeline and its benchmark artifacts are not included here.
+### 1. Contextual classification and topic analysis
 
-This repository contains the **web workbench and backend**, with fictional sample records for public exploration. The architecture documentation distinguishes the included implementation from the broader processing system.
+- Preserve parent-post and reply context when classifying **brand relevance, sentiment and question intent**.
+- Route low-confidence classifications to human review rather than treating uncertain predictions as confirmed findings.
+- Combine **embedding clustering and LLM topic normalization** to consolidate similar expressions into canonical themes.
+- Rank themes by **mentions and likes**, while keeping discussion volume, engagement and sentiment distinct.
+
+### 2. Grounded RAG and evaluation
+
+- Use **LangChain RAG with incremental indexing** to retrieve supporting posts and comments without rebuilding all unchanged records.
+- Ground answers and summaries in identifiable source evidence so users can trace conclusions back to the original conversation.
+- Support **custom question sets, batch testing and citation verification** to inspect answer quality and evidence support.
+
+### 3. Parallel processing with Ray
+
+Split comment-analysis and embedding-generation workloads into batches and execute them across a pool of Ray workers.
+
+| Benchmark | Result |
+| --- | --- |
+| Workload | 800 comments |
+| Sequential throughput | 0.34 comments/s |
+| Ray parallel throughput | 2.67 comments/s |
+| Throughput improvement | 7.9× |
+
+These project-level measurements describe the separate Python/Ray processing pipeline, not the web runtime included in this repository. Benchmark artifacts are not included in the public source.
 
 ## Interface preview
 
@@ -38,7 +58,7 @@ Ask questions about the corpus and inspect the source excerpts supporting each a
 
 ![Reports and evidence-linked Q&A](docs/screenshots/reports-qa.png)
 
-## Product
+## Workbench features
 
 - **Topic-first overview:** discussion-volume and engagement rankings, sentiment breakdowns, trend charts, and topic-level source exploration.
 - **Content insights:** searchable posts, contextual comments, source links, and processed records.
@@ -48,7 +68,7 @@ Ask questions about the corpus and inspect the source excerpts supporting each a
 - **Collection workspace:** bounded TikHub collection, contextual Qwen analysis, retryable jobs, and downloadable JSON records.
 - **System evaluation:** editable question sets, bounded concurrent execution, evidence checks, latency measurements, and separate manual grading.
 
-## Engineering
+## Web application stack
 
 | Layer | Implementation |
 | --- | --- |
@@ -60,7 +80,13 @@ Ask questions about the corpus and inspect the source excerpts supporting each a
 | Access control | Signed email sessions, owner-only mutations, separate machine credentials |
 | Verification | Type checks, production builds, unit tests and HTTP/database integration tests |
 
-The public repository includes fictional sample records for previews. Actual collected content, credentials, local databases and historical evaluation results are not included. The web runtime and optional external analysis service have distinct capabilities; see the architecture documentation for those boundaries.
+## Repository scope
+
+This repository contains the **React web workbench, TypeScript backend, persistence schema and integration code**. The broader project's Python/Ray workers, embedding-clustering pipeline and incremental vector index are not included; the web application provides integration boundaries for an external analysis service.
+
+The included web retrieval paths use source-linked lexical retrieval and LangChain orchestration for structured snapshots. Web evaluation uses bounded request concurrency, not Ray. See [Architecture](docs/architecture.md) for the implementation boundaries.
+
+Public previews use **fictional sample records**. Collected social-media content, credentials, local databases and historical evaluation results are excluded.
 
 ## Repository
 
