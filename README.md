@@ -2,6 +2,28 @@
 
 A social-listening workbench for turning scattered brand conversations into traceable consumer insights. The application connects posts and comments to canonical topics, separates brand opinions from unrelated reactions, and keeps business summaries linked to their source evidence.
 
+## Interface preview
+
+Screenshots show the English interface with fictional sample records.
+
+### Topic-first overview
+
+Compare discussion volume, engagement and sentiment, then explore the posts and comments behind each topic.
+
+![Topic-first overview](docs/screenshots/overview.png)
+
+### Contextual comment review
+
+Review each comment alongside its source post, classification and supporting context.
+
+![Contextual comment review](docs/screenshots/comment-review.png)
+
+### Reports & evidence-linked Q&A
+
+Ask questions about the corpus and inspect the source excerpts supporting each answer.
+
+![Reports and evidence-linked Q&A](docs/screenshots/reports-qa.png)
+
 ## Product
 
 - **Topic-first overview:** discussion-volume and engagement rankings, sentiment breakdowns, trend charts, and topic-level source exploration.
