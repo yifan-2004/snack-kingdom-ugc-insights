@@ -1,100 +1,51 @@
 # Social Listening & LLM Analytics Platform
 
-A social-listening platform for **Snack Kingdom**, a snack brand, connecting social-media collection, contextual comment analysis and evidence-backed consumer insights in one workbench.
+A social-listening workbench for **Snack Kingdom**, turning **849 posts and 12,738 comments from TikTok and RedNote** into sentiment distributions, ranked topics and evidence-backed business summaries.
 
-## Project background
+## Project highlights
 
-The end-to-end project crawled, cleaned and analyzed **849 posts and 12,738 comments from TikTok and RedNote**, producing sentiment distributions, topic-level insights and business summaries grounded in source evidence.
+- **Contextual analysis:** classify brand relevance, sentiment and question intent with parent-post context and low-confidence review; combine embedding clustering with LLM topic normalization to rank themes by mentions and likes.
+- **Grounded retrieval:** LangChain RAG with incremental indexing, source-linked answers and summaries, custom evaluation questions, batch testing and citation verification.
+- **Parallel processing:** Ray-batched analysis and embedding generation achieved **7.9× throughput** on an **800-comment benchmark** (**2.67 vs. 0.34 comments/s**).
 
-The goal is to identify what consumers are saying **about the brand**, not simply label every comment as positive or negative. Reactions to a creator, practical questions and unrelated discussion need different treatment before they can support a business conclusion.
-
-## Core design
-
-### 1. Contextual classification and topic analysis
-
-- Preserve parent-post and reply context when classifying **brand relevance, sentiment and question intent**.
-- Route low-confidence classifications to human review rather than treating uncertain predictions as confirmed findings.
-- Combine **embedding clustering and LLM topic normalization** to consolidate similar expressions into canonical themes.
-- Rank themes by **mentions and likes**, while keeping discussion volume, engagement and sentiment distinct.
-
-### 2. Grounded RAG and evaluation
-
-- Use **LangChain RAG with incremental indexing** to retrieve supporting posts and comments without rebuilding all unchanged records.
-- Ground answers and summaries in identifiable source evidence so users can trace conclusions back to the original conversation.
-- Support **custom question sets, batch testing and citation verification** to inspect answer quality and evidence support.
-
-### 3. Parallel processing with Ray
-
-Split comment-analysis and embedding-generation workloads into batches and execute them across a pool of Ray workers.
-
-| Benchmark | Result |
-| --- | --- |
-| Workload | 800 comments |
-| Sequential throughput | 0.34 comments/s |
-| Ray parallel throughput | 2.67 comments/s |
-| Throughput improvement | 7.9× |
-
-These project-level measurements describe the separate Python/Ray processing pipeline, not the web runtime included in this repository. Benchmark artifacts are not included in the public source.
+These highlights describe the full project. This repository contains the web application; the separate Python/Ray pipeline and vector index are not included. [Implementation scope →](docs/architecture.md)
 
 ## Interface preview
 
-Screenshots show the English interface with fictional sample records.
-
-### Topic-first overview
-
-Compare discussion volume, engagement and sentiment, then explore the posts and comments behind each topic.
+English interface with fictional sample records.
 
 ![Topic-first overview](docs/screenshots/overview.png)
 
-### Contextual comment review
+<details>
+<summary>More screenshots: comment review and evidence-linked Q&A</summary>
 
-Review each comment alongside its source post, classification and supporting context.
+### Contextual comment review
 
 ![Contextual comment review](docs/screenshots/comment-review.png)
 
-### Reports & evidence-linked Q&A
-
-Ask questions about the corpus and inspect the source excerpts supporting each answer.
+### Reports & Q&A
 
 ![Reports and evidence-linked Q&A](docs/screenshots/reports-qa.png)
 
-## Workbench features
+</details>
 
-- **Topic-first overview:** discussion-volume and engagement rankings, sentiment breakdowns, trend charts, and topic-level source exploration.
-- **Content insights:** searchable posts, contextual comments, source links, and processed records.
-- **Consumer feedback:** grouped questions and feedback, ranked by comment count plus total likes.
-- **Comment review:** contextual classification, source-text evidence, version checks, and persistent reviewer decisions.
-- **Reports and Q&A:** source-linked retrieval, scope-aware statistics, report export, and insufficient-evidence responses.
-- **Collection workspace:** bounded TikHub collection, contextual Qwen analysis, retryable jobs, and downloadable JSON records.
-- **System evaluation:** editable question sets, bounded concurrent execution, evidence checks, latency measurements, and separate manual grading.
+<details>
+<summary>Features and technical stack</summary>
 
-## Web application stack
+**Workbench:** topic rankings and trends, searchable posts and comments, consumer-feedback groups, contextual review, collection jobs, source-linked reports and Q&A, and editable evaluation sets.
 
 | Layer | Implementation |
 | --- | --- |
-| Frontend | React, TypeScript, Vite |
-| Backend | TypeScript HTTP routes, Vinext, Worker runtime |
-| Persistence | D1 / SQLite-compatible tables, Drizzle migrations, R2 object storage |
-| Analysis | Context-aware classification, topic normalization, opinion/intent separation |
-| Retrieval | Source-linked lexical retrieval; LangChain orchestration for the structured dataset API |
-| Access control | Signed email sessions, owner-only mutations, separate machine credentials |
-| Verification | Type checks, production builds, unit tests and HTTP/database integration tests |
+| [Frontend](frontend/) | React, TypeScript, Vite |
+| [Backend](backend/) | TypeScript, Vinext, Worker runtime |
+| Storage | D1 / SQLite-compatible tables, Drizzle migrations, R2 |
+| Web retrieval | Source-linked lexical retrieval and LangChain orchestration |
+| Controls | Signed sessions, owner-only mutations, version-checked review |
 
-## Repository scope
+Web evaluation uses bounded request concurrency, not Ray. Public source excludes collected content, credentials, local databases and historical benchmark artifacts.
 
-This repository contains the **React web workbench, TypeScript backend, persistence schema and integration code**. The broader project's Python/Ray workers, embedding-clustering pipeline and incremental vector index are not included; the web application provides integration boundaries for an external analysis service.
+</details>
 
-The included web retrieval paths use source-linked lexical retrieval and LangChain orchestration for structured snapshots. Web evaluation uses bounded request concurrency, not Ray. See [Architecture](docs/architecture.md) for the implementation boundaries.
+## Documentation
 
-Public previews use **fictional sample records**. Collected social-media content, credentials, local databases and historical evaluation results are excluded.
-
-## Repository
-
-- [Frontend](frontend/) — application shell, overview, content explorer, review, collection, reports and evaluation.
-- [Backend](backend/) — HTTP routes, processing services, access control, storage and migrations.
-- [Architecture](docs/architecture.md)
-- [Data processing and contracts](docs/data-processing.md)
-- [API reference](docs/api-reference.md)
-- [Developer guide](docs/development.md)
-- [Security and operational boundaries](docs/security.md)
-- [Verification record](docs/verification.md)
+[Architecture](docs/architecture.md) · [Data processing](docs/data-processing.md) · [API reference](docs/api-reference.md) · [Developer guide](docs/development.md) · [Security](docs/security.md) · [Verification](docs/verification.md)
