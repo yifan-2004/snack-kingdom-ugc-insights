@@ -1,0 +1,13 @@
+{
+  "version": "public-examples-v1",
+  "name": "Evidence and scope checks",
+  "description": "Example questions; no precomputed results.",
+  "globalMustNotClaim": ["sales impact", "all consumers"],
+  "scoring": {},
+  "questions": [
+    { "id": "SCOPE-001", "question": "How many posts and comments are in the sample?", "category": "scope", "manualRubric": "Counts must match the current snapshot.", "mustFindAny": [], "minimumEvidence": 0 },
+    { "id": "QUEUE-001", "question": "What do customers say about the queue?", "category": "evidence", "manualRubric": "Cite queue comments, not unrelated taste comments.", "mustFindAny": ["queue"], "minimumEvidence": 1 },
+    { "id": "TASTE-001", "question": "What positive comments discuss taste?", "category": "sentiment", "manualRubric": "Only positive taste evidence is eligible.", "mustFindAny": ["taste", "snacks"], "minimumEvidence": 1 },
+    { "id": "SAFE-001", "question": "What was the exact sales impact?", "category": "unsupported", "manualRubric": "Explain that collected feedback cannot establish sales impact.", "mustFindAny": [], "minimumEvidence": 0 }
+  ]
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `posts` ADD `metadata_json` text DEFAULT '{}' NOT NULL;

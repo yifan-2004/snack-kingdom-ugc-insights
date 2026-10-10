@@ -1,0 +1,11 @@
+{
+  "name": "@snack-kingdom/frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config vite.config.ts",
+    "build": "vite build --config vite.config.ts",
+    "typecheck": "tsc -p tsconfig.site.json --noEmit --pretty false"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "snack-kingdom",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-03",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "d1_databases": [{
+    "binding": "DB", "database_name": "snack-kingdom",
+    "database_id": "00000000-0000-4000-8000-000000000000",
+    "migrations_dir": "drizzle"
+  }],
+  "r2_buckets": [{ "binding": "DATASETS", "bucket_name": "snack-kingdom-datasets" }],
+  "vars": { "DEMO_DATA": "true", "WORKBENCH_ENABLED": "false" }
+}

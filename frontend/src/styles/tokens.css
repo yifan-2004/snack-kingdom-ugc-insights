@@ -1,0 +1,54 @@
+:root {
+  /* ---- 字体栈：中文优先系统栈，禁止纯拉丁展示字体渲染中文 ---- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ---- 动效缓动令牌（全站统一使用） ---- */
+  --ease-out-gentle: cubic-bezier(.32, .72, 0, 1);
+  --ease-out-back: cubic-bezier(0, 0, .85, 1.25);
+  --ease-out: cubic-bezier(0, 0, .58, 1);
+  --ease-in-out-gentle: cubic-bezier(.42, 0, .58, 1);
+
+  /* ---- 暖奶油双色调：绝不使用纯黑纯白 ---- */
+  --paper: #fff9ef;
+  --surface-soft: #fdf6ea;
+  --surface: #fffcf5;
+  --ink: #795e3f;
+  --ink-strong: #4a3423;
+  --ink-soft: #97795a;
+  --ink-muted: #b09a7c;
+
+  /* ---- 品牌强调色 ---- */
+  --accent: #ff8f5f;
+  --accent-strong: #f47c35;
+  --accent-deep: #d9622a;
+  --highlight: #ffe71e;
+  --cta: #f1001e;
+  --cta-deep: #c40018;
+
+  /* ---- 情感语义色（与奶油底同温：偏暖、低灰度） ---- */
+  --positive: #3e9c75;
+  --positive-soft: #e7f3ea;
+  --neutral: #b88736;
+  --neutral-soft: #d2a75d;
+  --neutral-tint: #f8eed7;
+  --negative: #c9654f;
+  --negative-soft: #f9ebe4;
+
+  /* ---- 发丝线与柔和阴影（不堆叠厚重投影） ---- */
+  --line: rgba(121, 94, 63, .14);
+  --line-strong: rgba(121, 94, 63, .24);
+  --shadow: 0 16px 44px rgba(74, 52, 35, .1);
+  --shadow-lift: 0 10px 28px rgba(74, 52, 35, .12);
+
+  /* ---- 圆角 ---- */
+  --radius-card: 1.25rem;
+  --radius-panel: 1rem;
+
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}

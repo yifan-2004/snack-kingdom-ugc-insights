@@ -1,0 +1,15 @@
+# Copy to .dev.vars for local development. Never commit real values.
+WORKBENCH_ALLOWED_EMAILS=owner@example.test
+WORKBENCH_PASSWORD_PBKDF2=
+WORKBENCH_SESSION_SECRET=
+TIKHUB_API_KEY=
+DASHSCOPE_API_KEY=
+DASHSCOPE_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+TEXT_MODEL=qwen3.5-flash
+# Optional external analysis service; not part of this web runtime.
+ANALYSIS_BACKEND_URL=
+ANALYSIS_BACKEND_TOKEN=
+SYNC_ENABLED=false
+SYNC_TOKEN_V2=
+RESET_ENABLED=false
+RESET_TOKEN_V2=

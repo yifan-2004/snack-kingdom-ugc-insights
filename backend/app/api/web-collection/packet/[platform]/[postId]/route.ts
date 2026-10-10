@@ -1,0 +1,4 @@
+import { requireOwner } from '../../../../../../lib/site-owner';
+import { getCollectionPacket } from '../../../../../../lib/web-collection';
+
+export async function GET(request:Request,{params}:{params:Promise<{platform:string;postId:string}>}){const actor=await requireOwner(request);if(actor instanceof Response)return actor;const {platform,postId}=await params;if(!['xhs','douyin'].includes(platform)||!/^[A-Za-z0-9._~-]{1,100}$/.test(postId))return Response.json({detail:'帖子编号无效'},{status:400});try{const value=await getCollectionPacket(platform,postId);return value?Response.json(value,{headers:{'Cache-Control':'private, no-store'}}):Response.json({detail:'帖子不存在'},{status:404})}catch(error){console.error('web collection packet failed',error);return Response.json({detail:'帖子暂不可用'},{status:503})}}
